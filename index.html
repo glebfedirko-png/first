@@ -1,0 +1,471 @@
+html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Новым Годом!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #0a2e38, #1a5a6c);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            opacity: 0.8;
+            animation: snowfall linear infinite;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .tree-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .tree {
+            position: relative;
+            width: 200px;
+            height: 300px;
+        }
+
+        .tree-part {
+            position: absolute;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 150px solid #0a7d3a;
+        }
+
+        .tree-part:nth-child(1) {
+            bottom: 0;
+            border-bottom-color: #0a7d3a;
+        }
+
+        .tree-part:nth-child(2) {
+            bottom: 80px;
+            width: 160px;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 120px solid #0b8d42;
+        }
+
+        .tree-part:nth-child(3) {
+            bottom: 150px;
+            width: 120px;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 90px solid #0c9d4a;
+        }
+
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 90px;
+            width: 20px;
+            height: 30px;
+            background: #8B4513;
+        }
+
+        .bauble {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: gold;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        .bauble:nth-child(4) {
+            top: 50px;
+            left: 60px;
+            background: red;
+        }
+
+        .bauble:nth-child(5) {
+            top: 80px;
+            left: 120px;
+            background: blue;
+        }
+
+        .bauble:nth-child(6) {
+            top: 120px;
+            left: 80px;
+            background: purple;
+        }
+
+        .bauble:nth-child(7) {
+            top: 160px;
+            left: 140px;
+            background: orange;
+        }
+
+        .bauble:nth-child(8) {
+            top: 200px;
+            left: 100px;
+            background: pink;
+        }
+
+        @keyframes twinkle {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .greeting {
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .greeting h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .greeting p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 100px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .gifts-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .gift {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            perspective: 600px;
+        }
+
+        .gift-box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+
+        .gift:hover .gift-box {
+            transform: rotateY(180deg);
+        }
+
+        .gift-front, .gift-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .gift-front {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        .gift-back {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            transform: rotateY(180deg);
+        }
+
+        .gift-ribbon {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: gold;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .gift-ribbon::before, .gift-ribbon::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: gold;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .gift-ribbon::before {
+            left: -10px;
+        }
+
+        .gift-ribbon::after {
+            right: -10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+            }
+            
+            .gift {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snowflakes" id="snowflakes"></div>
+    
+    <div class="container">
+        <header>
+            <h1>С Новым 2026 Годом!</h1>
+            <p>Пусть этот год принесет вам счастье, здоровье и удачу!</p>
+        </header>
+        
+        <div class="tree-container">
+            <div class="tree">
+                <div class="tree-part"></div>
+                <div class="tree-part"></div>
+                <div class="tree-part"></div>
+                <div class="tree-trunk"></div>
+                <div class="bauble"></div>
+                <div class="bauble"></div>
+                <div class="bauble"></div>
+                <div class="bauble"></div>
+                <div class="bauble"></div>
+            </div>
+        </div>
+        
+        <div class="greeting">
+            <h2>Новогоднее поздравление</h2>
+            <p>Дорогие друзья! Пусть в новом году сбудутся все ваши мечты, а каждый день будет наполнен радостью, теплом и любовью. Желаем вам встретить праздник в кругу близких и провести весь год в гармонии и благополучии!</p>
+        </div>
+        
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Дней</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Часов</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Минут</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Секунд</div>
+            </div>
+        </div>
+        
+        <div class="gifts-section">
+            <div class="gift">
+                <div class="gift-box">
+                    <div class="gift-front">
+                        <div class="gift-ribbon"></div>
+                    </div>
+                    <div class="gift-back">🎁</div>
+                </div>
+            </div>
+            <div class="gift">
+                <div class="gift-box">
+                    <div class="gift-front">
+                        <div class="gift-ribbon"></div>
+                    </div>
+                    <div class="gift-back">🎄</div>
+                </div>
+            </div>
+            <div class="gift">
+                <div class="gift-box">
+                    <div class="gift-front">
+                        <div class="gift-ribbon"></div>
+                    </div>
+                    <div class="gift-back">⭐</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Создано с ❤️ для праздничного настроения | 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        // Создание снежинок
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeCount = 100;
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = '❄';
+                
+                // Случайные параметры для снежинок
+                const size = Math.random() * 1.5 + 0.5;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 10 + 5;
+                const animationDelay = Math.random() * 5;
+                
+                snowflake.style.fontSize = `${size}em`;
+                snowflake.style.left = `${left}%`;
+                snowflake.style.animationDuration = `${animationDuration}s`;
+                snowflake.style.animationDelay = `${animationDelay}s`;
+                
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+        
+        // Обратный отсчет до Нового года
+        function updateCountdown() {
+            const now = new Date();
+            const nextYear = now.getFullYear() + 1;
+            const newYear = new Date(`January 1, ${nextYear} 00:00:00`);
+            
+            const diff = newYear - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            createSnowflakes();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
